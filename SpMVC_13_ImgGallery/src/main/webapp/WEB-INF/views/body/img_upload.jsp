@@ -12,8 +12,10 @@
 			<form:textarea type="text" path="img_text" placeholder="제목을 입력하세요" />		
 		</div>
 		<div class="input_box">
+			<form:input path="img_file"/>
 			<div id="d_d_box">
-				<h3>이미지를 올려놓으세요</h3>			
+				<h3>이미지를 올려놓으세요</h3>
+				<img id="img_view" height="95%">			
 			</div>
 		</div>
 		<div class="input_box">

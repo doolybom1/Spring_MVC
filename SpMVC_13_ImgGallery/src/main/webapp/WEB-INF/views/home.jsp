@@ -11,9 +11,10 @@
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
-<script src="${rootPath}/javascript/summernote-ko-KR.js" type="text/javascript">
-
-</script>
+<script src="${rootPath}/javascript/summernote-ko-KR.js" type="text/javascript"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.contextMenu.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.ui.position.min.js"></script>
 
 <style>
 * {
@@ -97,6 +98,14 @@ input[type="text"]{
 	align-items: center;
 }
 
+#img_file{
+	display:none;
+}
+
+#img_view{
+	display: none;
+}
+
 </style>
 <script>
 $(function() {
@@ -137,7 +146,51 @@ $(function() {
 	$("#d_d_box").on('drop', function(e) {
 		$("#d_d_box h3").text("파일 업로드 중!!!")
 		
+		// drop한 파일리스트 추출
+		let files = e.originalEvent.dataTransfer.files
+		alert(files[0].name)
+		// 리스트에서 첫번째 파일만 추출
+		let file = files[0]
+		
+		// js FormData 클래스를 사용해서 서버에 파일 업로드 준비
+		let formData = new FormData()
+		formData.append('file',file)
+		
+		$.ajax({
+			url: '${rootPath}/rest/file_up',
+			method: 'POST',
+			data: formData,
+			processData: false, // 파일 업로드 필수옵션
+			contentType: false, // 파일 업로드 필수옵션
+			success: function(result){
+				if(result == "FAIL"){
+					alert("파일 업로드 오류")
+				}else{
+					$("#img_file").val(result)
+					$("#img_view").css("display","block")
+					$("#img_view").attr("src", '${rootPath}/images/' + result)
+					$("#d_d_box h3").text("파일 업로드 성공")
+					$("#d_d_box h3").css("display", "none")
+					
+				}
+				
+				alert(result)
+			},
+			error: function() {
+				alert("서버 통신 오류")
+			}
+		})
+		
 		return false
+		
+	})
+	
+	$contextMenu({
+		selector:'.img_card',
+		items : {
+			'edit':{name:'수정', icon:'edit'},
+			'delete':{name:'삭제', icon:'delete'}
+		}
 	})
 })
 </script>
@@ -152,12 +205,12 @@ $(function() {
 			<%@ include file="/WEB-INF/views/body/img_upload.jsp" %>
 		</c:if>
 	
-	
+		
 	</section>
 
 
 	<section id="img_box">
-		<c:forEach begin="1" end="10">
+		<c:forEach items="${imgList}" var="img">
 			<%@ include file="/WEB-INF/views/include/img_card.jsp"%>
 		</c:forEach>
 	</section>

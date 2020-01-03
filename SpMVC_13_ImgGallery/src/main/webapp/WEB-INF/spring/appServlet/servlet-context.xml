@@ -10,8 +10,12 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/images/**" location="/images/" />
+	<resources mapping="/images/**" location="/images/,file:///c:/bizwork/files/" />
 	<resources mapping="/javascript/**" location="/javascript/" />
+
+	<beans:bean id="filePath" class="java.lang.String">
+		<beans:constructor-arg value="/bizwork/files/"/>
+	</beans:bean>
 
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
