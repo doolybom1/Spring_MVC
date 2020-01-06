@@ -1,5 +1,7 @@
 package com.biz.gallery.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,10 +15,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-
 public class ImageVO {
+
 	private long img_seq;
 	private String img_title;
 	private String img_text;
 	private String img_file;
+	
+	private List<String> img_files;
 }

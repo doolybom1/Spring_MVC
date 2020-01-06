@@ -9,19 +9,23 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.biz.gallery.service.FileService;
 
-@RequestMapping(value = "/rest")
+@RequestMapping(value="/rest")
 @RestController
 public class ImgRestController {
-	
+
 	@Autowired
 	FileService fService;
 	
-	@RequestMapping(value = "/file_up", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	
+	@RequestMapping(value="/file_up", method=RequestMethod.POST, produces="text/html;charset=UTF-8")
 	public String file_up(@RequestParam("file") MultipartFile upfile) {
-		
+
 		String upLoadFileName = fService.file_up(upfile);
+		
+		// 업로드가 잘못됐단 얘기
 		if(upLoadFileName == null) return "FAIL";
 		else return upLoadFileName;
+		
 		
 	}
 }
