@@ -36,6 +36,9 @@ public class BookService {
 		return bDao.update(bookDTO);
 	}
 
+	public BookDTO findByBCode(String b_code) {
+		return bDao.findByBCode(b_code);
+	}
 
 	
 	
@@ -45,9 +48,11 @@ public class BookService {
 		return null;
 	}
 
-	public BookDTO findByBCode(String b_code) {
-		return bDao.findByBCode(b_code);
+	public int delete(String b_code) {
+
+		return bDao.delete(b_code);
 	}
+
 
 
 	

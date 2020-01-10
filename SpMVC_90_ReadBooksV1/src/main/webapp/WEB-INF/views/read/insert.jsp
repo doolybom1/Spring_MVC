@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<title>□□□ 도서정보 입력 □□□</title>
+<title>□□□ 도서록 정보 □□□</title>
 <style>
  fieldset {
  	width:70%;
@@ -72,10 +72,6 @@ $(function() {
 			return false;
 		}
 	})
-	
-	$("#btn-read-insert").click(function() {
-		document.location.href = "${rootPath}/read/insert"
-	})
 })
 </script>
 </head>
@@ -84,21 +80,25 @@ $(function() {
   // form:form post로 controller의 insert post로 넘김
 %>
 <fieldset>
-	<legend> 도서 정보 입력</legend>
-	<form:form modelAttribute="bookDTO"  autocomplete="on"  class="book-form">
+	<legend> 독서록 입력</legend>
+	<form:form modelAttribute="bookReadDTO"  autocomplete="on"  class="book-form">
 			
-		<form:input path="b_code" id="b_code"
-				class="in-box" placeholder="도서코드"  /><br/>
-		<form:input path="b_name" id="b_name"
-				class="in-box" placeholder="도서명"  /><br/>
-		<form:input path="b_comp" id="b_comp"
-				class="in-box" placeholder="출판사"  /><br/>
-		<form:input path="b_auther" id="b_auther"
-				class="in-box" placeholder="저자"  /><br/>
-		<form:input path="b_year" id="b_year" value="${serverTime}"
-				class="in-box" placeholder="구입일자"  /><br/>
-		<form:input path="b_iprice" id="b_iprices"
-				class="in-box" placeholder="구입가격"  /><br/>
+		<form:input type="hidden" path="rb_seq" id="rb_seq"
+				class="in-box" placeholder="SEQ" /><br/>
+		<form:input path="rb_bcode" id="rb_bcode"
+				class="in-box" placeholder="도서코드" value="${BCODE}" /><br/>
+		<form:input path="rb_date" id="rb_date"
+				class="in-box" placeholder="독서일자"  /><br/>
+		<form:input path="rb_stime" id="rb_stime" type="time"
+				class="in-box" placeholder="독서시작시각"  /><br/>
+		<form:input path="rb_rtime" id="rb_rtime"  
+				class="in-box" placeholder="독서시간"  /><br/>
+		<form:input path="rb_subject" id="rb_subject"
+				class="in-box" placeholder="한줄소감"  /><br/>
+		<form:input path="rb_text" id="rb_text"
+				class="in-box" placeholder="긴줄소감"  /><br/>
+		<form:input path="rb_star" id="rb_star" 
+				class="in-box" placeholder="별점"  /><br/>
 
 		<button id="btn-store">저장</button>
 		<button type="reset">초기화</button>

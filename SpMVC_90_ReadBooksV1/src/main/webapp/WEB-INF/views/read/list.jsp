@@ -15,7 +15,7 @@
 		paddin:0;
 	}
 	.list{
-		border-collapse: collapse;
+		border:1px solid black;
 		margin: auto;
 		overflow : auto;
 	}
@@ -36,20 +36,20 @@
 		background-color: #ccc;
 	} 
 
-	#book_insert{
+	#read_insert{
 		display:block;
 		margin: 10px auto;
 		text-align: center;
 	}
 	
-	#book_insert button{
+	#read_insert button{
 		padding: 10px;
 		background-color: tomato;
 		color:white;
 		border-style: none;
 		font-weight: bold;
 	}
-	#book_insert button:hover{
+	#read_insert button:hover{
 		cursor: pointer;
 	}
 	section{
@@ -60,7 +60,8 @@
 		width: 450px;
 	}
 
-</style>	
+</style>
+	
 <script>
 $(function() {
 	
@@ -68,52 +69,42 @@ $(function() {
 	$(".content-body").click(function(){
 		let id = $(this).attr("data-id")
 
-		document.location.href = "${rootPath}/book/view?id=" + id
+		document.location.href = "${rootPath}/read/view?id=" + id
 	})
 })
-
 </script>
 </head>
 <body>	
 <header>
-	<h2>도서 정보</h2>
+	<h2>독서록 리스트</h2>
 </header>
-		<!-- 
-		<section>
-			<input id="search" type="text" placeholder="검색어를 입력하시오">
-		</section>
-		 -->
-		<table class="list" border="1">
+		<table class="list" >
 			<tr class="list-box">
+			
+				<th>SEQ</th>
 				<th>도서코드</th>
 				<th>도서명</th>
-				<th>저자</th>
-				<th>출판사</th>
-				<th>구입일자</th>
-				<th>구입가격</th>
+				<th>독서일자</th>
+				<th>한줄소감</th>
+				<th>별점</th>
 			</tr>
 			<c:choose>
-			<c:when test="${empty BOOK_LIST}">
+			<c:when test="${empty READ_LIST}">
 				<tr><td colspan="6"></td>
 			</c:when>
 			<c:otherwise>
-					<c:forEach items="${BOOK_LIST}" var="book" varStatus="index">
-								<tr class="content-body" data-id="${book.b_code}" data-auth="${book.b_auther}" >
-									<td>${book.b_code}</td>
-									<td>${book.b_name}</td>
-									<td>${book.b_auther}</td>
-									<td>${book.b_comp}</td>
-									<td>${book.b_year}</td>
-									<td>${book.b_iprice}</td>
+					<c:forEach var="read"  items="${READ_LIST}" varStatus="status">
+								<tr class="content-body" >
+									<td>${read.rb_seq }</td>
+									<td>${read.rb_bcode}</td>
+									<td>${read.b_code}</td>
+									<td>${read.rb_date}</td>
+									<td>${read.rb_subject}</td>
+									<td>${read.rb_star}</td>
 								</tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</table>
-		<div id="book_insert">
-			<a href="${rootPath}/book/insert"><button>도서등록</button></a>
-			<a href="${rootPath}/read/list"><button>독서록 리스트</button></a>
-			
-		</div>
 </body>
 </html>

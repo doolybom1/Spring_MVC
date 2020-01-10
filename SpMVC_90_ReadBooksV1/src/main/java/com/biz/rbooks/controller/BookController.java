@@ -43,59 +43,67 @@ public class BookController {
 		return "list";
 	}
 	
+	// 도서 정보 입력
 	@RequestMapping(value = "insert",method = RequestMethod.GET)
 	public String insert(@ModelAttribute("bookDTO") BookDTO bookDTO, Model model) {
 		
 		Date date = new Date();
-		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
 		String curDate = sd.format(date);
 		model.addAttribute("serverTime", curDate);
 		
 		model.addAttribute("bookDTO", bookDTO);
 		return "insert";
 	}
-	
-	@RequestMapping(value="/view",method=RequestMethod.GET)
-	public String view(@RequestParam("id") String b_code, @ModelAttribute BookDTO bookDTO, Model model) {
-		
-		bookDTO = bService.findByBCode(b_code);
-		model.addAttribute("bookDTO", bookDTO);
-		return "view";
-		
-	}
-	
+
 	
 	@RequestMapping(value="insert",method=RequestMethod.POST)
 	public String insert(@ModelAttribute("bookDTO") BookDTO bookDTO, String b_code,Model model,SessionStatus sStatus) {
 		
-		bookDTO = bService.findByBCode(b_code);
+		int ret = bService.insert(bookDTO);
 		
-		model.addAttribute("bookDTO", bookDTO);
 		// session에 담긴 값을 clear 		
 		sStatus.setComplete();
 		
 		return "redirect:/book/list";
 	}
 	
-	@RequestMapping(value="update",method=RequestMethod.GET)
-	public String update(BookDTO bookDTO, Model model) {
+	// 도서 정보 상세
+	@RequestMapping(value="/view",method=RequestMethod.GET)
+	public String view(@RequestParam("id") String b_code, @ModelAttribute BookDTO bookDTO, Model model) {
 		
-		int ret = bService.update(bookDTO);
-		
-		return "insert";
+		bookDTO = bService.findByBCode(b_code);
+		model.addAttribute("bookDTO", bookDTO);
+		return "view";
 	}
 	
-	
+
+	// 도서 정보 수정
+	@RequestMapping(value="update",method=RequestMethod.GET)
+	public String update(@ModelAttribute("bookDTO")BookDTO bookDTO, Model model, @RequestParam("id") String b_code) {
+		
+		bookDTO = bService.findByBCode(b_code);
+		model.addAttribute("bookDTO", bookDTO);
+		return "insert";
+	}
 	
 	@RequestMapping(value="update",method=RequestMethod.POST)
-	public String update(BookDTO bookDTO) {
+	public String update(@ModelAttribute("bookDTO") BookDTO bookDTO, SessionStatus sStatus) {
 		
 		int ret = bService.update(bookDTO);
-		
-		return "insert";
+		sStatus.setComplete();
+		return "redirect:/book/list";
 	}
-	
-	
+
+	// 도서 정보 삭제
+	@RequestMapping(value = "delete",method=RequestMethod.GET)
+	public String delete(@RequestParam("id") String b_code) {
+		
+		int ret = bService.delete(b_code);
+		
+		return "redirect:/book/list";
+				
+	}
 	
 	
 }

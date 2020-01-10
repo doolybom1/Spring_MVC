@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.rbooks.repository.BookReadDao">
+ 	
+ 	<select id="selectAll" resultType="bookreadDTO">
+		SELECT rb.rb_seq,rb.rb_bcode, bo.b_name ,rb.rb_date,rb.rb_subject,rb.rb_star
+			FROM tbl_read_book rb
+			    LEFT JOIN tbl_books bo
+	        ON rb.rb_bcode = bo.b_code		
+ 	</select>
+ 
+ <!-- 
+ 		SELECT * FROM tbl_read_book ORDER BY rb_seq
+ 	 <resultMap type="BookReadDTO" id="readAndBook">
+  	<id column="rb_seq" property="rb_seq"/>
+  	<result column="rb_bcode" property="rb_bcode" />
+	<result column="rb_date" property="rb_date" />
+	<result column="rb_stime" property="rb_stime" />
+	<result column="rb_rtime" property="rb_rtime" />
+	<result column="rb_subject" property="rb_subject" />
+	<result column="rb_text" property="rb_text" />
+	<result column="rb_star" property="rb_star" />
+  	
+  	<collection property="bookList"
+  				column="b_name"
+  				ofType="BookDTO"
+  				select="findByBCode" />
+  </resultMap>	
+ 	<select id="findByBCode" resultMap="readAndBook">
+  	SELECT * FROM tbl_books WHERE b_code = #{b_code}
+  </select>
+ -->
+ 	<insert id="findByRBBCode" >
+ 		INSERT INTO tbl_read_book(
+	 		RB_SEQ,
+			RB_BCODE,
+			RB_DATE,
+			RB_STIME,
+			RB_RTIME,
+			RB_SUBJECT,
+			RB_TEXT,
+			RB_STAR
+ 		)VALUES(
+			RB_SEQ.NEXTVAL,
+			#{rb_bcode,jdbcType=VARCHAR},
+			#{rb_date,jdbcType=VARCHAR},
+			#{rb_stime,jdbcType=VARCHAR},
+			#{rb_rtime,jdbcType=VARCHAR},
+			#{rb_subject,jdbcType=VARCHAR},
+			#{rb_text,jdbcType=VARCHAR},
+			#{rb_star,jdbcType=VARCHAR}
+ 		)
+ 			
+ 	</insert>
+ 	
+ 	<select id="findByRBSeq" resultType="bookreadDTO">
+ 		SELECT * FROM tbl_read_book
+ 		WHERE RB_SEQ = #{rb_seq}
+ 	</select>
+ 	
+ 	<select id="findByRBCode" resultType="bookreadDTO">
+ 		SELECT * FROM tbl_read_book
+ 		WHERE RB_BCODE = #{rb_bcode}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="bookreadDTO">
+ 		UPDATE tbl_read_book SET
+	 			RB_SEQ = #{rb_seq,jdbcType=VARCHAR},
+				RB_DATE = #{rb_date,jdbcType=VARCHAR},
+				RB_STIME = #{rb_stime,jdbcType=VARCHAR},
+				RB_RTIME = #{rb_rtime,jdbcType=VARCHAR},
+				RB_SUBJECT = #{subject,jdbcType=VARCHAR},
+				RB_TEXT = #{rb_text,jdbcType=VARCHAR},
+				RB_STAR = #{rb_star,jdbcType=VARCHAR}
+		WHERE RB_BCODE = #{rb_bcode,jdbcType=VARCHAR}
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="bookreadDTO">
+ 		DELETE FROM tbl_books WHERE b_code = #{b_code}
+ 	</delete>
+ 	
+ </mapper>

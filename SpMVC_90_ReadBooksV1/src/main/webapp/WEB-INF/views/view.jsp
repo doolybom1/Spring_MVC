@@ -20,7 +20,7 @@
 	}
 	
 	table th {
-		text-align : left;
+		text-align : center;
 		background-color : #f7f7f7;
 		color : #3b3b3b;
 	}
@@ -45,17 +45,18 @@
 		justify-content: center;
 		align-items: center;
 	}
-	
 	a.btn {
 		border-radius: 3px;
-		padding:5px 11px;
-		color: #fff;
+		padding:10px;
+		color: white;
 		display: inline-block;
-		background-color: #6b9ab8;
+		background-color: tomato;
 		border : 1px solid #56819d;
 		vertical-align: middle;
 		text-decoration: none;
 		margin:10px;
+		border-style: none;
+		font-weight: bold;
 	}
 	
 	a.btn:hover {
@@ -69,25 +70,26 @@
 </style>
 <script>
 $(function(){
+	
+	// 새 페이지를 만들고 페이지 위에 겹치기
 	$("#btn-update").on("click",function(){
-		/*
-		새 페이지를 만들어 지금 페이지 위에 겹쳐서 보여라
-		뒤로가기를 하면 이전페이지로 돌아가기가 되고
-		*/
 		document.location.href 
 			= "${rootPath}/book/update?id=${bookDTO.b_code}" 
 		
 	})
 	
+	// 	현재 페이지를 지우고, 새로운 페이지로 보여주기
 	$("#btn-delete").click(function(){
 		if(confirm("도서 정보를 삭제합니다!!!")) {
-			/*
-			현재 페이지를 지우고, 새로운 페이지로 다시 그려라
-			뒤로가기를 하면 엉뚱한 페이지(history에 저장된)로 이동
-			*/
-			let query = "${rootPath}/book/delete?b_code=${bookDTO.b_code}"
+			let query = "${rootPath}/book/delete?id=${bookDTO.b_code}"
 			document.location.replace(query)
 		}
+	})
+
+	$("#btn-read").click(function(){
+		document.location.href 
+		= "${rootPath}/read/insert?id=${bookDTO.b_code}" 
+		
 	})
 })
 </script>
@@ -117,12 +119,13 @@ $(function(){
 
 </table>
 
-<br/><br/>
 <div class="btn-box">
 	<a href="javascript:void(0)" 
 			class="btn" id="btn-update">수정</a>
 	<a href="javascript:void(0)" 
 			class="btn" id="btn-delete">삭제</a>
+	<a href="javascript:void(0)"
+			class="btn" id="btn-read">독서록 작성</a>
 </div>
 
 
