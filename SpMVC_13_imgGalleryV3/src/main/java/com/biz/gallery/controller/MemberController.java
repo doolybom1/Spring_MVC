@@ -38,6 +38,11 @@ public class MemberController {
 		return "redirect:/image/list";
 	}
 	
+	@RequestMapping(value = "login",method=RequestMethod.GET)
+	public String login() {
+		return "body/login";
+	}
+	
 	//@ResponseBody
 	@RequestMapping(value = "login",method = RequestMethod.POST)
 	public String login(MemberVO memberVO, Model model, HttpSession httpSession) {
@@ -51,7 +56,7 @@ public class MemberController {
 		//	return "LOGIN_OK";
 		}else {
 			httpSession.removeAttribute("MEMBER");
-			//return "LOGIN_FAIL";
+		//	return "LOGIN_FAIL";
 		}
 		return "redirect:/image/list";
 	}

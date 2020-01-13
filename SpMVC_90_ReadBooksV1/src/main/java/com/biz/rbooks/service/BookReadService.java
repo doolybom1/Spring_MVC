@@ -30,6 +30,21 @@ public class BookReadService {
 	public int insert(BookReadDTO bookReadDTO) {
 		return brDao.findByRBBCode(bookReadDTO);
 	}
+
+	public BookReadDTO findByRBSeq(long rb_seq) {
+		
+		return brDao.findByRBSeq(rb_seq);
+	}
+
+	public int update(BookReadDTO readbookDTO) {
+		return brDao.update(readbookDTO);
+	}
+
+	public int delete(long rb_seq) {
+		
+		return brDao.delete(rb_seq);
+	}
+
 	
 
 	

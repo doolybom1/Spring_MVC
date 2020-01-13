@@ -26,6 +26,7 @@ public class BookReadDTO {
 	private String rb_subject;	// 한줄소감
 	private String rb_text;	// 긴줄소감
 	private long rb_star;	// 독서느낌(별점)
+	private String rb_writer; // 작성자
 	
-	//private List<BookDTO> bookList;
+	private List<BookDTO> bookNameList;
 }

@@ -5,15 +5,11 @@
   
  <mapper namespace="com.biz.rbooks.repository.BookReadDao">
  	
- 	<select id="selectAll" resultType="bookreadDTO">
-		SELECT rb.rb_seq,rb.rb_bcode, bo.b_name ,rb.rb_date,rb.rb_subject,rb.rb_star
-			FROM tbl_read_book rb
-			    LEFT JOIN tbl_books bo
-	        ON rb.rb_bcode = bo.b_code		
+ 	<select id="selectAll" resultMap="readAndBook">
+ 		SELECT * FROM tbl_read_book ORDER BY rb_seq
  	</select>
  
- <!-- 
- 		SELECT * FROM tbl_read_book ORDER BY rb_seq
+
  	 <resultMap type="BookReadDTO" id="readAndBook">
   	<id column="rb_seq" property="rb_seq"/>
   	<result column="rb_bcode" property="rb_bcode" />
@@ -24,15 +20,17 @@
 	<result column="rb_text" property="rb_text" />
 	<result column="rb_star" property="rb_star" />
   	
-  	<collection property="bookList"
-  				column="b_name"
-  				ofType="BookDTO"
+  	<collection property="bookNameList"
+  				column="b_code"
+  				ofType="bookDTO"
   				select="findByBCode" />
   </resultMap>	
+ 
  	<select id="findByBCode" resultMap="readAndBook">
   	SELECT * FROM tbl_books WHERE b_code = #{b_code}
   </select>
- -->
+
+
  	<insert id="findByRBBCode" >
  		INSERT INTO tbl_read_book(
 	 		RB_SEQ,
@@ -42,7 +40,8 @@
 			RB_RTIME,
 			RB_SUBJECT,
 			RB_TEXT,
-			RB_STAR
+			RB_STAR,
+			RB_WRITER
  		)VALUES(
 			RB_SEQ.NEXTVAL,
 			#{rb_bcode,jdbcType=VARCHAR},
@@ -51,7 +50,8 @@
 			#{rb_rtime,jdbcType=VARCHAR},
 			#{rb_subject,jdbcType=VARCHAR},
 			#{rb_text,jdbcType=VARCHAR},
-			#{rb_star,jdbcType=VARCHAR}
+			#{rb_star,jdbcType=VARCHAR},
+			#{rb_writer,jdbcType=VARCHAR}
  		)
  			
  	</insert>
@@ -68,18 +68,19 @@
  	
  	<update id="update" parameterType="bookreadDTO">
  		UPDATE tbl_read_book SET
-	 			RB_SEQ = #{rb_seq,jdbcType=VARCHAR},
+	 			RB_BCODE = #{rb_bcode,jdbcType=VARCHAR},
 				RB_DATE = #{rb_date,jdbcType=VARCHAR},
 				RB_STIME = #{rb_stime,jdbcType=VARCHAR},
 				RB_RTIME = #{rb_rtime,jdbcType=VARCHAR},
-				RB_SUBJECT = #{subject,jdbcType=VARCHAR},
+				RB_SUBJECT = #{rb_subject,jdbcType=VARCHAR},
 				RB_TEXT = #{rb_text,jdbcType=VARCHAR},
-				RB_STAR = #{rb_star,jdbcType=VARCHAR}
-		WHERE RB_BCODE = #{rb_bcode,jdbcType=VARCHAR}
+				RB_STAR = #{rb_star,jdbcType=VARCHAR},
+				RB_WRITER = #{rb_writer,jdbcType=VARCHAR}
+		WHERE RB_SEQ = #{rb_seq,jdbcType=VARCHAR} 
  	</update>
  	
  	<delete id="delete" parameterType="bookreadDTO">
- 		DELETE FROM tbl_books WHERE b_code = #{b_code}
+ 		DELETE FROM tbl_read_book WHERE rb_seq = #{br_seq}
  	</delete>
  	
  </mapper>

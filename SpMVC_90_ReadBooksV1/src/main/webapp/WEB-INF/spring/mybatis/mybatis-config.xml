@@ -9,6 +9,8 @@
 			type="com.biz.rbooks.domain.BookDTO" alias="bookDTO"/>
 		<typeAlias 
 			type="com.biz.rbooks.domain.BookReadDTO" alias="bookreadDTO"/>
+		<typeAlias 
+			type="com.biz.rbooks.domain.MemberDTO" alias="memberDTO"/>
 
 	</typeAliases>
 </configuration>	

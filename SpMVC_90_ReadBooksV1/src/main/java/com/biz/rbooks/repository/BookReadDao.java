@@ -10,4 +10,10 @@ public interface BookReadDao {
 
 	public int findByRBBCode(BookReadDTO bookReadDTO);
 
+	public BookReadDTO findByRBSeq(long rb_seq);
+
+	public int update(BookReadDTO readbookDTO);
+
+	public int delete(long rb_seq);
+
 }

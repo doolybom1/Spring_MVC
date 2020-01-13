@@ -48,32 +48,11 @@
  button:hover{
  	cursor: pointer;
  }
+ 
 
 </style>
 
-<script>
-$(function() {
-	$("#btn-store").click(function() {
-		let b_code = $("#b_code").val()
-		if(b_code == ""){
-			alert("도서 코드는 반드시 입력하세요");
-			return false;
-		}
-		
-		let b_name = $("#b_name").val()
-		if(b_name == ""){
-			alert("도서명은 반드시 입력하세요");
-			return false;
-		}
-		
-		let b_comp = $("#b_comp").val()
-		if(b_comp == ""){
-			alert("출판사는 반드시 입력하세요");
-			return false;
-		}
-	})
-})
-</script>
+
 </head>
 <body>
 <%
@@ -88,9 +67,9 @@ $(function() {
 		<form:input path="rb_bcode" id="rb_bcode"
 				class="in-box" placeholder="도서코드" value="${BCODE}" /><br/>
 		<form:input path="rb_date" id="rb_date"
-				class="in-box" placeholder="독서일자"  /><br/>
+				class="in-box" placeholder="독서일자" value="${serverDate}" /><br/>
 		<form:input path="rb_stime" id="rb_stime" type="time"
-				class="in-box" placeholder="독서시작시각"  /><br/>
+				class="in-box" placeholder="독서시작시각" value="${serverTime}" /><br/>
 		<form:input path="rb_rtime" id="rb_rtime"  
 				class="in-box" placeholder="독서시간"  /><br/>
 		<form:input path="rb_subject" id="rb_subject"

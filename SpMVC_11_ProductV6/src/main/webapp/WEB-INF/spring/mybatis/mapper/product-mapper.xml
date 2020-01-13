@@ -61,6 +61,7 @@
   				ofType="proFileDTO"
   				select="findByPCodeFiles" />
   </resultMap>	
+  
   <select id="findByPCode" resultMap="proAndFiles">
     select * from tbl_product WHERE p_code = #{p_code}
   </select>

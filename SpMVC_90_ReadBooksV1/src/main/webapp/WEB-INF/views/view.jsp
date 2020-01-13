@@ -71,21 +71,24 @@
 <script>
 $(function(){
 	
-	// 새 페이지를 만들고 페이지 위에 겹치기
+	// 수정 클릭시 update controller로
 	$("#btn-update").on("click",function(){
+		// 새 페이지를 만들고 페이지 위에 겹치기
 		document.location.href 
 			= "${rootPath}/book/update?id=${bookDTO.b_code}" 
 		
 	})
 	
-	// 	현재 페이지를 지우고, 새로운 페이지로 보여주기
+	// 삭제 클릭시 delete controller로
 	$("#btn-delete").click(function(){
 		if(confirm("도서 정보를 삭제합니다!!!")) {
 			let query = "${rootPath}/book/delete?id=${bookDTO.b_code}"
+			// 	현재 페이지를 지우고, 새로운 페이지로 보여주기
 			document.location.replace(query)
 		}
 	})
 
+	// 독서록 작성 클릭시 read/insert controller로
 	$("#btn-read").click(function(){
 		document.location.href 
 		= "${rootPath}/read/insert?id=${bookDTO.b_code}" 

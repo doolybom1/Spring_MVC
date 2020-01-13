@@ -1,5 +1,7 @@
 package com.biz.rbooks.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,4 +24,5 @@ public class BookDTO {
 	private String b_comp;	// 출판사
 	private String b_year;	// 구입일자
 	private long b_iprice;	// 구입가격
+	
 }

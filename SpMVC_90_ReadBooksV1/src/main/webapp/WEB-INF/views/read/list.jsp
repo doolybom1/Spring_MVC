@@ -17,6 +17,7 @@
 	.list{
 		border:1px solid black;
 		margin: auto;
+		width: 800px;
 		overflow : auto;
 	}
 	
@@ -59,6 +60,10 @@
 		padding: 0.5rem;
 		width: 450px;
 	}
+	.list{
+		border-collapse: collapse;
+		text-align: center;
+	}
 
 </style>
 	
@@ -78,7 +83,7 @@ $(function() {
 <header>
 	<h2>독서록 리스트</h2>
 </header>
-		<table class="list" >
+		<table class="list" border="1" >
 			<tr class="list-box">
 			
 				<th>SEQ</th>
@@ -87,20 +92,22 @@ $(function() {
 				<th>독서일자</th>
 				<th>한줄소감</th>
 				<th>별점</th>
+				<th>작성자</th>
 			</tr>
 			<c:choose>
 			<c:when test="${empty READ_LIST}">
-				<tr><td colspan="6"></td>
+				<tr><td colspan="7"></td>
 			</c:when>
 			<c:otherwise>
 					<c:forEach var="read"  items="${READ_LIST}" varStatus="status">
-								<tr class="content-body" >
+								<tr class="content-body" data-id="${read.rb_seq}">
 									<td>${read.rb_seq }</td>
 									<td>${read.rb_bcode}</td>
-									<td>${read.b_code}</td>
+									<td>도서명</td>
 									<td>${read.rb_date}</td>
 									<td>${read.rb_subject}</td>
 									<td>${read.rb_star}</td>
+									<td>${read.rb_writer}</td>
 								</tr>
 					</c:forEach>
 				</c:otherwise>
