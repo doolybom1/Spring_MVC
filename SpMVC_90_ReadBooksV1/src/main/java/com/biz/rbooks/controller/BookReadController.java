@@ -42,12 +42,11 @@ public class BookReadController {
 	 * 독서록 리스트 메서드
 	 */
 	@RequestMapping(value = "list",method=RequestMethod.GET)
-	public String readList(Model model, BookDTO bookDTO) {
+	public String readList(Model model, BookDTO bookDTO, long rb_seq) {
 		
 		
-		List<BookReadDTO> rList = brService.SelectAll();
-		log.debug("로그:"+rList.toString());
-		
+		List<BookReadDTO> rlist = (List<BookReadDTO>) brService.findByRBSeq(rb_seq);
+		log.debug("로그:"+rlist.toString()+"\n");
 		List<BookReadDTO> readList = brService.SelectAll();
 		
 		model.addAttribute("READ_LIST", readList);
