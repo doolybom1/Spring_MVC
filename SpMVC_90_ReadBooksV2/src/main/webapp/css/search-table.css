@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+#search-table{
+	background-color:white;
+	border-collapse: collapse;
+	width: 90%;
+	
+	margin: 10px auto;
+	border-bottom: 1px solid #ddd;
+	
+	height:100%;
+	display: block;
+}
+
+#search-table td, #search-table th{
+	white-space: nowrap;
+	text-align: left;
+	padding: 8px;
+	vertical-align: top;
+}
+
+#search-table{
+	display: block;
+	overflow:scroll;
+	height: 100%;
+}
+
+#main-table th:nth-of-type(6), #main-table td:nth-of-type(6){
+	width: 70%;
+}
+
+.flex-right{
+	margin-left: auto;
+}
+
+#main-button{
+	display: flex;
+}
+
+button {
+	border: none;
+	display: inline-block;
+	padding: 8px 16px;
+	vertical-align: middle;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+	
+	color: inherit;
+	background-color: inherit;
+	border-radius: 5px;
+}
+
+button:hover {
+	color: #000;
+	background-color: #ccc !important;
+}
