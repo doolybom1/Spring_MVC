@@ -21,6 +21,12 @@ public class SendMailService {
 
 	private final JavaMailSender xMail;
 	
+	/**
+	 * @since 2020-01-23
+	 * @author 이의재
+	 * @param emailVO
+	 */
+	
 	public void sendMail(EmailVO emailVO) {
 		
 		log.debug("EMAIL:"+ emailVO.toString());
