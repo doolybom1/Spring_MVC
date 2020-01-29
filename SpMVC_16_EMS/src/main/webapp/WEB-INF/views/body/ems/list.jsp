@@ -9,7 +9,7 @@
 		})
 	})
 </script>
-<table class="main-list">
+<table class="main-list table-dark">
 	<tr>
 		<th>NO</th>
 		<th>받는Email</th>

@@ -67,9 +67,13 @@
 .login-form button:hover {
 	background-color: #2ECC71;
 }
+
 </style>
 <script>
 $(function() {
+	
+	
+	
 	$("#btn-join").click(function() {
 		document.location.href = "${rootPath}/rest/member/join"
 	})
