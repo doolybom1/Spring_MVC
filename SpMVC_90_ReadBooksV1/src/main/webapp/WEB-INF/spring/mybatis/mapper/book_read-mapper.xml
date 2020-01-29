@@ -5,13 +5,13 @@
   
  <mapper namespace="com.biz.rbooks.repository.BookReadDao">
  	
- 	<select id="selectAll" resultType="readbookDTO">
+ 	<select id="selectAll" resultMap="readAndBook">
  		SELECT * FROM tbl_read_book ORDER BY rb_seq
  	</select>
- 
+ 	
 
- 	 <resultMap type="bookreadDTO" id="readAndBook">
-  	<id column="rb_seq" property="rb_seq"/>
+ 	 <resultMap type="bookReadDTO" id="readAndBook">
+  	<id column="rb_bcode" property="rb_bcode"/>
   	<result column="rb_bcode" property="rb_bcode" />
 	<result column="rb_date" property="rb_date" />
 	<result column="rb_stime" property="rb_stime" />
@@ -20,13 +20,13 @@
 	<result column="rb_text" property="rb_text" />
 	<result column="rb_star" property="rb_star" />
   	
-  	<collection property="book_name_list"
+  	<collection property="bookNameList"	
   				column="rb_bcode"
   				ofType="bookDTO"
   				select="findByBCode" />
   </resultMap>	
  
- 	<select id="findByBCode" resultMap="readAndBook">
+ 	<select id="findByBCode" resultType="bookDTO">
   	SELECT * FROM tbl_books WHERE b_code = #{b_code}
   </select>
 

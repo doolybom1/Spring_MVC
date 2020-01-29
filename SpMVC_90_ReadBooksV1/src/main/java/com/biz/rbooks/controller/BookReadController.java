@@ -42,12 +42,10 @@ public class BookReadController {
 	 * 독서록 리스트 메서드
 	 */
 	@RequestMapping(value = "list",method=RequestMethod.GET)
-	public String readList(Model model, BookDTO bookDTO, long rb_seq) {
+	public String readList(Model model, BookReadDTO bookReadDTO) {
 		
-		
-		List<BookReadDTO> rlist = (List<BookReadDTO>) brService.findByRBSeq(rb_seq);
-		log.debug("로그:"+rlist.toString()+"\n");
 		List<BookReadDTO> readList = brService.SelectAll();
+		log.debug("로그확인"+ readList.toString());
 		
 		model.addAttribute("READ_LIST", readList);
 		
@@ -85,7 +83,6 @@ public class BookReadController {
 		
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("MEMBER");
 		bookReadDTO.setRb_writer(memberDTO.getM_id());
-	
 		int ret = brService.insert(bookReadDTO);
 		
 		// session에 담긴 값을 clear 		

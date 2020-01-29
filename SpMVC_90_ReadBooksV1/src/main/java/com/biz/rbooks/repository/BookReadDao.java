@@ -2,6 +2,7 @@ package com.biz.rbooks.repository;
 
 import java.util.List;
 
+import com.biz.rbooks.domain.BookDTO;
 import com.biz.rbooks.domain.BookReadDTO;
 
 public interface BookReadDao {

@@ -17,7 +17,7 @@
 	.list{
 		border:1px solid black;
 		margin: auto;
-		width: 800px;
+		width: 1000px;
 		overflow : auto;
 	}
 	
@@ -26,15 +26,19 @@
 	}
 	.content-body:hover{
 		cursor: pointer;
-		border:4px solid tomato;
+		background-color: #212529;
+		transition: 0.5s;
+		color: white;
 	}
 
 	header h2{
 		text-align: center;
 		margin :2rem;
+		color: tomato;
 	}
 	.list-box th{
-		background-color: #ccc;
+		padding: 5px 7px;
+		background-color: #f7f7f7;
 	} 
 
 	#read_insert{
@@ -64,6 +68,21 @@
 		border-collapse: collapse;
 		text-align: center;
 	}
+	#main{
+		cursor: pointer;
+		margin: 5px;
+		padding: 6px 8px;
+		background-color: tomato;
+		border:	none;
+		color:white;
+		border-radius: 5px;
+		font-size: 15px;
+	}
+	
+	#btn-main{
+		
+		text-align: center !important;
+	}
 
 </style>
 	
@@ -75,6 +94,10 @@ $(function() {
 		let id = $(this).attr("data-id")
 
 		document.location.href = "${rootPath}/read/view?id=" + id
+	})
+	
+	$("#main").click(function() {
+		document.location.href = "${rootPath}/book/list"
 	})
 })
 </script>
@@ -103,7 +126,7 @@ $(function() {
 								<tr class="content-body" data-id="${read.rb_seq}">
 									<td>${read.rb_seq }</td>
 									<td>${read.rb_bcode}</td>
-									<td>도서명</td>
+									<td>${read.bookNameList[0].b_name}</td>
 									<td>${read.rb_date}</td>
 									<td>${read.rb_subject}</td>
 									<td>${read.rb_star}</td>
@@ -113,5 +136,8 @@ $(function() {
 				</c:otherwise>
 			</c:choose>
 		</table>
+		<div id="btn-main">
+			<button type="button" id="main">메인 화면</button>
+		</div>
 </body>
 </html>

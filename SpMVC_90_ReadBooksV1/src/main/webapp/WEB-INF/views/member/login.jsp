@@ -68,36 +68,7 @@
 	background-color: #2ECC71;
 }
 </style>
-<script>
-$(function() {
-	$("#btn-join").click(function() {
-		document.location.href = "${rootPath}/member/join"
-	})
-	
-	$("btn-login").click(function() {
-		
-		var params = $("form").serialize();
-		$.ajax({
-			url : "${rootPath}/member/login",
-			type : 'POST',
-			data : params,
-			dataType : 'json',
-			success : function(result) {
-				alert(result)
-			}
-		})
-		
-		/*
-		$.post("${rootPath}/member/login",
-			{$("form").serialize()},
-			function (result) {
-				alert(result)
-			}
-		})
-		*/
-	})
-})
-</script>
+
 
 <form method="POST" action="${rootPath}/member/login" class="login-form">
 	<h2>로그인</h2>
@@ -114,8 +85,8 @@ $(function() {
 		<h3>로그인을 환영합니다.</h3>
 	</c:if>
 
-	<input type="text" name="m_id" placeholder="사용자 ID"> 
-	<input type="password" name="m_password" placeholder="비밀번호">
+	<input type="text" name="m_id" id="m_id" placeholder="사용자 ID"> 
+	<input type="password" name="m_password" id="m_password" placeholder="비밀번호">
 	<button type="submit" id="btn-login">로그인</button>
 	<a style="text-decoration:none;" href="${rootPath}/member/join"><button type="button" id="btn-join">회원가입</button></a>
 

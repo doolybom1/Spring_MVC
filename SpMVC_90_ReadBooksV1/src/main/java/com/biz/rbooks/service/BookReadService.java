@@ -45,7 +45,6 @@ public class BookReadService {
 		return brDao.delete(rb_seq);
 	}
 
-	
 
 	
 
