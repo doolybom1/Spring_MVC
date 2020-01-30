@@ -8,7 +8,6 @@ com\biz\ems\service\NaverLoginService.class
 com\biz\ems\controller\EMSController.class
 com\biz\ems\service\SendMailService.class
 com\biz\ems\controller\MybatisRestController.class
-com\biz\ems\domain\NaverLoginOK.class
 com\biz\ems\Main.class
 com\biz\ems\mapper\MybatisEmailDao.class
 com\biz\ems\controller\MemberController.class

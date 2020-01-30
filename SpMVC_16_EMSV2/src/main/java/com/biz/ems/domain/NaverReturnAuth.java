@@ -10,11 +10,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class NaverLoginOK {
+public class NaverReturnAuth {
 	
 	private String code;
 	private String state;
-	private String email;
-	private String nickname;
-	private String name;
+	private String error;
+	private String error_description;
 }
