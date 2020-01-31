@@ -1,5 +1,7 @@
 package com.biz.ems.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,15 +36,15 @@ public class MemberController {
 	 * 네이버에 로그인이 성공하면 실제로 네이버에서 로그인 인증정보를 보내준다
 	 */
 	
-	@ResponseBody
+	//@ResponseBody
 	@RequestMapping(value = "naver/ok",method=RequestMethod.GET)
-	public NaverMember naver_ok(@ModelAttribute NaverReturnAuth naverOK) {
+	public String naver_ok(@ModelAttribute NaverReturnAuth naverOK, HttpSession httpSession) {
 		
 		NaverTokenVO nToken = nLoginService.oAuthAccessGetToken(naverOK);
 		NaverMember memberVO = nLoginService.getNaverMemberInfo(nToken);
 		
+		httpSession.setAttribute("MEMBER", memberVO);
 		
-		return memberVO;
-		
+		return "redirect:/ems/list";
 	}
 }
