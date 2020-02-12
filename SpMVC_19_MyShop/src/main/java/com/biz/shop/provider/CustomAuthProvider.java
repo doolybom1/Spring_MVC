@@ -26,6 +26,11 @@ public class CustomAuthProvider implements AuthenticationProvider{
 		String username = (String) authentication.getPrincipal();
 		String password = (String) authentication.getCredentials();	
 		
+		
+		/*
+		 * 만약 해당 사용자 Detail 정보가 DB에 있다면 해당 정보를 DB에서 조회하여 CustomUserDetails 클래스에 세팅하여 controller로 전송할 수 있다
+		 */
+		
 		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
 		roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		roles.add(new SimpleGrantedAuthority("ROLE_USER"));
